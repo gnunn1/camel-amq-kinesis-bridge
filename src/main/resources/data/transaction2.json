@@ -1,0 +1,7 @@
+{
+    "firstName":"Bob",
+    "lastName":"Smith",
+    "transactionType":"withdrawal",
+    "amount":23.15,
+    "balance":2582.89
+}
