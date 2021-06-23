@@ -1,0 +1,1 @@
+Basic example of using Red Hat Fuse (Camel) to act as a message bridge between AMQ and AWS kinesis
