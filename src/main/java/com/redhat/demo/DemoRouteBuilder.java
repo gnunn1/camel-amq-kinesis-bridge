@@ -34,9 +34,13 @@ public class DemoRouteBuilder extends RouteBuilder {
             .to(getAMQProducerEndpoint());
 
         from(getAMQConsumerEndpoint()).routeId("bridge-amq-kinesis")
-            .log("Received a message from AMQ - ${body} - sending to Kinesis")
-            .setHeader(KinesisConstants.PARTITION_KEY, constant(UUID.randomUUID().toString()))
-            .to(getKinesisEndpoint());
+            .choice()
+              .when().jsonpath("$..[?(@.transactionType == 'withdrawal')]")
+                .log("Received a message from AMQ, sending to Kinesis - ${body}")
+                .setHeader(KinesisConstants.PARTITION_KEY, constant(UUID.randomUUID().toString()))
+                .to(getKinesisEndpoint())
+              .otherwise()
+                .log("Received a message from AMQ, ignoring - ${body}");
 
         from(getKinesisEndpoint()).routeId("read-kinesis stream")
             .log("Received a message from Kinesis - ${body}");

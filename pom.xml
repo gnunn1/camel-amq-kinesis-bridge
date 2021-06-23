@@ -71,6 +71,10 @@
       <artifactId>activation</artifactId>
       <version>1.1.1.redhat-5</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-jsonpath</artifactId>
+    </dependency>
     <!-- Messaging -->
     <dependency>
         <groupId>org.apache.camel</groupId>
